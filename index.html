@@ -8,35 +8,32 @@
 
 <body>
 
-  <!-- 🔥 BARRA LATERAL -->
-  <div class="sidebar">
-    <button>Início</button>
-    <button>Projetos</button>
-    <button>Sobre</button>
-    <button>Contato</button>
-  </div>
-
-  <!-- 🔥 CONTEÚDO PRINCIPAL -->
-  <div class="container">
+  <!-- 🏠 MENU INICIAL -->
+  <div id="menu">
     <h1>Mortex Studio</h1>
+
+    <div class="sidebar">
+      <button onclick="irInicio()">Início</button>
+      <button>Projetos</button>
+      <button>Sobre</button>
+      <button>Contato</button>
+    </div>
   </div>
 
-  <!-- 💬 CHAT DA IA -->
-  <div class="chat">
-    <input id="pergunta" placeholder="Digite sua dúvida sobre JJS...">
-    <button onclick="responder()">Perguntar</button>
-    <p id="resposta"></p>
+  <!-- 💬 PÁGINA DO CHAT -->
+  <div id="chatPage" style="display:none;">
+    <h2>Chat JJS</h2>
+
+    <div id="mensagens"></div>
+
+    <input id="pergunta" placeholder="Digite sua dúvida sobre JJS">
+    <button onclick="enviar()">Enviar</button>
+
+    <button onclick="voltarMenu()">Voltar</button>
   </div>
 
-  <!-- ⚙️ SCRIPT DA IA -->
+  <!-- ⚙️ SCRIPT -->
   <script src="script.js"></script>
-
-  <div class="chat" id="chat">
-  <div id="mensagens"></div>
-
-  <input id="pergunta" placeholder="Digite sua dúvida sobre JJS...">
-  <button onclick="enviar()">Enviar</button>
-</div>
 
 </body>
 </html>
