@@ -1,57 +1,268 @@
-body {
-  margin: 0;
-  font-family: Arial;
-  background: black;
-  color: white;
+/* ===========================
+   MORTEX STUDIO - STYLE.CSS
+   PARTE 1
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* TEXTO CENTRAL */
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+html,body{
+    width:100%;
+    height:100%;
+    font-family:Arial,Helvetica,sans-serif;
+    overflow:hidden;
+    background:#020202;
+    color:white;
 }
 
-.center h1 {
-  font-size: 60px;
-  color: #00aaff;
-  text-shadow: 0 0 20px #00aaff;
+.page{
+    display:none;
+    width:100%;
+    height:100vh;
 }
 
-/* BOTÃO INÍCIO */
-#inicioBtn {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-
-  padding: 12px 30px;
-  font-size: 16px;
-
-  background: black;
-  color: white;
-
-  border: 2px solid #00aaff;
-  border-radius: 8px;
-
-  cursor: pointer;
-  transition: 0.3s;
+.page.active{
+    display:flex;
 }
 
-#inicioBtn:hover {
-  background: #00aaff;
-  color: black;
+/* ================= HOME ================= */
+
+#home{
+
+    position:relative;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    background:black;
+
 }
 
-/* CHAT */
-#chat {
-  padding: 20px;
+/* Fundo */
+
+.fire-bg{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    background:
+    radial-gradient(circle at center,#003d66 0%,#00131f 35%,black 70%);
+
 }
 
-#mensagens {
-  height: 70vh;
-  overflow-y: auto;
-  border: 1px solid #00aaff;
-  padding: 10px;
-  margin-bottom: 10px;
+/* Brilho */
+
+.fire-bg::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:900px;
+
+    height:900px;
+
+    left:50%;
+
+    top:45%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(circle,
+    rgba(0,180,255,.25),
+    transparent 70%);
+
+    filter:blur(70px);
+
+}
+
+/* Chamas */
+
+.fire-bg::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    radial-gradient(circle at 50% 100%,
+    rgba(0,180,255,.30),
+    transparent 40%),
+
+    radial-gradient(circle at 25% 90%,
+    rgba(0,130,255,.20),
+    transparent 35%),
+
+    radial-gradient(circle at 75% 90%,
+    rgba(0,180,255,.25),
+    transparent 35%);
+
+    animation:fogo 4s infinite alternate ease-in-out;
+
+}
+
+@keyframes fogo{
+
+0%{
+
+transform:scale(1);
+
+filter:blur(0px);
+
+}
+
+100%{
+
+transform:scale(1.12);
+
+filter:blur(15px);
+
+}
+
+}
+
+/* Partículas */
+
+.particles{
+
+position:absolute;
+
+width:100%;
+
+height:100%;
+
+background-image:
+
+radial-gradient(#00c8ff 1px,transparent 1px);
+
+background-size:40px 40px;
+
+opacity:.18;
+
+animation:particlesMove 18s linear infinite;
+
+}
+
+@keyframes particlesMove{
+
+from{
+
+transform:translateY(0);
+
+}
+
+to{
+
+transform:translateY(-500px);
+
+}
+
+}
+
+/* Centro */
+
+.home-content{
+
+position:relative;
+
+z-index:10;
+
+text-align:center;
+
+}
+
+.logo{
+
+font-size:72px;
+
+font-weight:900;
+
+letter-spacing:3px;
+
+color:#66d8ff;
+
+text-shadow:
+
+0 0 10px #00bfff,
+
+0 0 30px #00bfff,
+
+0 0 60px #007fff;
+
+}
+
+.subtitle{
+
+margin-top:18px;
+
+font-size:22px;
+
+color:#d4f3ff;
+
+opacity:.9;
+
+}
+
+/* Botão */
+
+#startButton{
+
+position:absolute;
+
+left:45px;
+
+bottom:80px;
+
+width:230px;
+
+height:65px;
+
+background:black;
+
+color:white;
+
+border:2px solid #00bfff;
+
+border-radius:14px;
+
+font-size:24px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+z-index:20;
+
+}
+
+#startButton:hover{
+
+background:#00bfff;
+
+color:black;
+
+box-shadow:
+
+0 0 20px #00bfff;
+
 }
