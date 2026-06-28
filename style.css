@@ -110,3 +110,29 @@ body::before {
   background: #00aaff;
   color: black;
 }
+
+.chat {
+  width: 350px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 20;
+}
+
+#mensagens {
+  height: 200px;
+  overflow-y: auto;
+  border: 1px solid #00aaff;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: rgba(0,0,0,0.5);
+  color: #00aaff;
+}
+
+.chat input {
+  width: 70%;
+  padding: 8px;
+}
+
+.chat button {
+  padding: 8px;
+}
