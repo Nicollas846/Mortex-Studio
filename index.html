@@ -1,114 +1,138 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Mortex Studio</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<!-- ================= TELA INICIAL ================= -->
+<!-- ================= HOME ================= -->
 
-<div id="home" class="page active">
+<section id="home" class="page active">
 
-    <div class="background-fire"></div>
+    <div class="fire-bg">
+
+        <div class="particles"></div>
+
+    </div>
 
     <div class="home-content">
 
         <h1 class="logo">
+
             Mortex Studio
+
         </h1>
 
         <p class="subtitle">
-            IA especializada em Jujutsu Shenanigans
-        </p>
 
-        <button class="start-btn" onclick="abrirChat()">
-            INÍCIO
-        </button>
+            IA especializada em Jujutsu Shenanigans
+
+        </p>
 
     </div>
 
-</div>
+    <button id="startButton" onclick="abrirChat()">
+
+        INÍCIO
+
+    </button>
+
+</section>
 
 <!-- ================= CHAT ================= -->
 
-<div id="chat" class="page">
+<section id="chat" class="page">
 
-    <header class="chat-header">
+<header>
 
-        <div class="ai-profile">
+<div class="profile">
 
-            <div class="ai-avatar">
-                🔥
-            </div>
+<div class="avatar">
 
-            <div>
-
-                <h2>Mortex AI</h2>
-
-                <span>🟢 Online</span>
-
-            </div>
-
-        </div>
-
-        <button class="back-btn" onclick="voltarHome()">
-            Voltar
-        </button>
-
-    </header>
-
-    <main id="chatBox">
-
-        <div class="message ai">
-
-            <div class="avatar">
-                🔥
-            </div>
-
-            <div class="bubble">
-
-                Olá! Sou a Mortex AI.
-
-                Pergunte qualquer coisa sobre
-                Jujutsu Shenanigans.
-
-            </div>
-
-        </div>
-
-    </main>
-
-    <footer class="chat-input">
-
-        <label class="upload-btn">
-
-            📎
-
-            <input type="file" hidden>
-
-        </label>
-
-        <input
-            type="text"
-            id="pergunta"
-            placeholder="Digite sua pergunta..."
-        >
-
-        <button class="send-btn" onclick="enviarMensagem()">
-
-            ➤
-
-        </button>
-
-    </footer>
+🔥
 
 </div>
+
+<div>
+
+<h2>Mortex AI</h2>
+
+<p>Online</p>
+
+</div>
+
+</div>
+
+<button id="backButton" onclick="voltarHome()">
+
+Voltar
+
+</button>
+
+</header>
+
+<main id="messages">
+
+<div class="ai-message">
+
+<div class="avatar-mini">
+
+🔥
+
+</div>
+
+<div class="bubble ai">
+
+Olá!
+
+Sou a Mortex AI.
+
+Pergunte qualquer coisa sobre
+Jujutsu Shenanigans.
+
+</div>
+
+</div>
+
+</main>
+
+<footer>
+
+<label class="upload">
+
+📎
+
+<input type="file" hidden>
+
+</label>
+
+<input
+type="text"
+id="userInput"
+placeholder="Digite sua pergunta..."
+>
+
+<button id="sendButton">
+
+➤
+
+</button>
+
+</footer>
+
+</section>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
