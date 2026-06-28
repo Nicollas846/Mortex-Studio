@@ -1,24 +1,45 @@
 body {
   margin: 0;
-  font-family: Arial;
-  background: black;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #001018, #000000);
   color: #00aaff;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* MENU */
+/* TELA INICIAL */
 #menu {
   text-align: center;
-  margin-top: 50px;
+  padding-top: 60px;
+}
+
+#menu h1 {
+  font-size: 50px;
+  text-shadow: 0 0 10px #00aaff, 0 0 30px #0066ff;
+}
+
+/* SIDEBAR */
+.sidebar {
+  margin-top: 40px;
 }
 
 .sidebar button {
   display: block;
   margin: 10px auto;
-  padding: 10px;
-  background: transparent;
+  width: 200px;
+  padding: 12px;
   border: 1px solid #00aaff;
+  background: transparent;
   color: #00aaff;
   cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.sidebar button:hover {
+  background: #00aaff;
+  color: black;
+  transform: scale(1.05);
 }
 
 /* CHAT */
@@ -27,9 +48,24 @@ body {
 }
 
 #mensagens {
-  height: 200px;
+  height: 300px;
   overflow-y: auto;
   border: 1px solid #00aaff;
   padding: 10px;
-  margin-bottom: 10px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.4);
+}
+
+/* INPUT */
+input {
+  width: 70%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px;
+  border-radius: 5px;
 }
