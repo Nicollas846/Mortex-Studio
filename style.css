@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  overflow: hidden;
+}
+
+/* fundo com “energia azul” */
+body::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0,140,255,0.3), transparent 60%),
+              radial-gradient(circle, rgba(0,80,255,0.2), transparent 40%);
+  animation: move 6s infinite alternate;
+}
+
+@keyframes move {
+  from { transform: translate(-10%, -10%) scale(1); }
+  to { transform: translate(10%, 10%) scale(1.2); }
+}
+
+/* texto */
+.container h1 {
+  font-size: 70px;
+  color: #00aaff;
+  text-shadow:
+    0 0 10px #00aaff,
+    0 0 20px #0066ff,
+    0 0 40px #0033ff;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.6); }
+}
+
+/* barra lateral esquerda */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 200px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  border-right: 1px solid rgba(0, 170, 255, 0.3);
+  z-index: 10;
+}
+
+/* botões */
+.sidebar button {
+  background: transparent;
+  border: 1px solid #00aaff;
+  color: #00aaff;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-shadow: 0 0 10px #00aaff;
+}
+
+.sidebar button:hover {
+  background: #00aaff;
+  color: black;
+  box-shadow: 0 0 20px #00aaff;
+}
+
+/* empurra o conteúdo pro lado pra não ficar em cima da barra */
+.container {
+  margin-left: 220px;
+}
