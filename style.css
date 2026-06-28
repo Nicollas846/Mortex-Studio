@@ -265,4 +265,232 @@ box-shadow:
 
 0 0 20px #00bfff;
 
+   /* ===========================
+   CHAT
+=========================== */
+
+#chat{
+
+display:flex;
+
+flex-direction:column;
+
+width:100%;
+
+height:100vh;
+
+background:#050505;
+
+}
+
+/* Cabeçalho */
+
+#chat header{
+
+height:80px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:0 30px;
+
+background:#0b0b0b;
+
+border-bottom:1px solid #00bfff55;
+
+box-shadow:0 0 20px rgba(0,170,255,.15);
+
+}
+
+.profile{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.avatar{
+
+width:58px;
+
+height:58px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:26px;
+
+background:#0b1c28;
+
+border:2px solid #00bfff;
+
+box-shadow:0 0 18px #00bfff55;
+
+}
+
+.profile h2{
+
+font-size:22px;
+
+color:white;
+
+}
+
+.profile p{
+
+font-size:14px;
+
+color:#6dff9a;
+
+margin-top:4px;
+
+}
+
+/* Botão voltar */
+
+#backButton{
+
+padding:12px 28px;
+
+background:black;
+
+color:white;
+
+border:2px solid #00bfff;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-size:18px;
+
+transition:.3s;
+
+}
+
+#backButton:hover{
+
+background:#00bfff;
+
+color:black;
+
+}
+
+/* Conversas */
+
+#messages{
+
+flex:1;
+
+overflow-y:auto;
+
+padding:35px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:22px;
+
+scroll-behavior:smooth;
+
+}
+
+/* Mensagem IA */
+
+.ai-message{
+
+display:flex;
+
+gap:14px;
+
+align-items:flex-start;
+
+}
+
+/* Avatar pequeno */
+
+.avatar-mini{
+
+width:46px;
+
+height:46px;
+
+border-radius:50%;
+
+background:#08151f;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+border:2px solid #00bfff;
+
+flex-shrink:0;
+
+}
+
+/* Balão */
+
+.bubble{
+
+max-width:70%;
+
+padding:16px 18px;
+
+border-radius:18px;
+
+font-size:17px;
+
+line-height:1.6;
+
+}
+
+/* IA */
+
+.bubble.ai{
+
+background:#101010;
+
+border:1px solid #00bfff55;
+
+color:white;
+
+box-shadow:0 0 12px rgba(0,170,255,.08);
+
+}
+
+/* Usuário */
+
+.user-message{
+
+display:flex;
+
+justify-content:flex-end;
+
+}
+
+.user-message .bubble{
+
+background:#00bfff;
+
+color:black;
+
+font-weight:bold;
+
+}
+
 }
