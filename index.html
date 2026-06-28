@@ -1,37 +1,114 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Mortex Studio</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortex Studio</title>
 
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
 
-  <!-- 🏠 HOME -->
-  <div id="home">
+<!-- ================= TELA INICIAL ================= -->
 
-    <button id="inicioBtn" onclick="abrirChat()">Início</button>
+<div id="home" class="page active">
 
-    <div class="center">
-      <h1>Mortex Studio</h1>
+    <div class="background-fire"></div>
+
+    <div class="home-content">
+
+        <h1 class="logo">
+            Mortex Studio
+        </h1>
+
+        <p class="subtitle">
+            IA especializada em Jujutsu Shenanigans
+        </p>
+
+        <button class="start-btn" onclick="abrirChat()">
+            INÍCIO
+        </button>
+
     </div>
 
-  </div>
+</div>
 
-  <!-- 💬 CHAT -->
-  <div id="chat" style="display:none;">
+<!-- ================= CHAT ================= -->
 
-    <div id="mensagens"></div>
+<div id="chat" class="page">
 
-    <input id="input" placeholder="Digite sua dúvida sobre JJS">
-    <button onclick="enviar()">Enviar</button>
+    <header class="chat-header">
 
-    <button onclick="voltar()">Voltar</button>
+        <div class="ai-profile">
 
-  </div>
+            <div class="ai-avatar">
+                🔥
+            </div>
 
-  <script src="script.js"></script>
+            <div>
+
+                <h2>Mortex AI</h2>
+
+                <span>🟢 Online</span>
+
+            </div>
+
+        </div>
+
+        <button class="back-btn" onclick="voltarHome()">
+            Voltar
+        </button>
+
+    </header>
+
+    <main id="chatBox">
+
+        <div class="message ai">
+
+            <div class="avatar">
+                🔥
+            </div>
+
+            <div class="bubble">
+
+                Olá! Sou a Mortex AI.
+
+                Pergunte qualquer coisa sobre
+                Jujutsu Shenanigans.
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="chat-input">
+
+        <label class="upload-btn">
+
+            📎
+
+            <input type="file" hidden>
+
+        </label>
+
+        <input
+            type="text"
+            id="pergunta"
+            placeholder="Digite sua pergunta..."
+        >
+
+        <button class="send-btn" onclick="enviarMensagem()">
+
+            ➤
+
+        </button>
+
+    </footer>
+
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
