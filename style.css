@@ -1,71 +1,50 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: radial-gradient(circle at top, #001018, #000000);
-  color: #00aaff;
+  font-family: Arial;
+  background: black;
+  color: white;
+}
+
+/* HOME */
+#home {
   height: 100vh;
-  overflow: hidden;
+  position: relative;
 }
 
-/* TELA INICIAL */
-#menu {
-  text-align: center;
-  padding-top: 60px;
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
-#menu h1 {
-  font-size: 50px;
-  text-shadow: 0 0 10px #00aaff, 0 0 30px #0066ff;
+.center h1 {
+  font-size: 60px;
+  color: #00aaff;
+  text-shadow: 0 0 20px #00aaff;
 }
 
-/* SIDEBAR */
-.sidebar {
-  margin-top: 40px;
-}
-
-.sidebar button {
-  display: block;
-  margin: 10px auto;
-  width: 200px;
-  padding: 12px;
-  border: 1px solid #00aaff;
+/* botão inicio canto esquerdo */
+#inicioBtn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
   background: transparent;
+  border: 1px solid #00aaff;
   color: #00aaff;
   cursor: pointer;
-  border-radius: 8px;
-  transition: 0.3s;
-}
-
-.sidebar button:hover {
-  background: #00aaff;
-  color: black;
-  transform: scale(1.05);
 }
 
 /* CHAT */
-#chatPage {
+#chat {
   padding: 20px;
 }
 
 #mensagens {
-  height: 300px;
+  height: 70vh;
   overflow-y: auto;
   border: 1px solid #00aaff;
   padding: 10px;
-  border-radius: 10px;
-  background: rgba(0,0,0,0.4);
-}
-
-/* INPUT */
-input {
-  width: 70%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-button {
-  padding: 10px;
-  border-radius: 5px;
+  margin-bottom: 10px;
 }
