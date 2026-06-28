@@ -7,42 +7,27 @@
 </head>
 
 <body>
-  
-<body>
 
-  
-  <!-- resto do seu site -->
-  <div id="menu">
-    ...
-  </div>
+  <!-- 🏠 TELA INICIAL -->
+  <div id="home">
 
-</body>
-  
-  <!-- 🏠 MENU -->
-  <div id="menu">
+    <button id="inicioBtn" onclick="abrirChat()">Início</button>
 
-    <h1>Mortex Studio</h1>
-
-    <div class="sidebar">
-      <button onclick="irInicio()">Início</button>
-      <button>Projetos</button>
-      <button>Sobre</button>
-      <button>Contato</button>
+    <div class="center">
+      <h1>Mortex Studio</h1>
     </div>
 
   </div>
 
   <!-- 💬 CHAT -->
-  <div id="chatPage" style="display:none;">
-
-    <h2>Chat JJS</h2>
+  <div id="chat" style="display:none;">
 
     <div id="mensagens"></div>
 
-    <input id="pergunta" placeholder="Digite sua dúvida sobre JJS">
+    <input id="input" placeholder="Digite sua dúvida sobre JJS">
     <button onclick="enviar()">Enviar</button>
 
-    <button onclick="voltarMenu()">Voltar</button>
+    <button onclick="voltar()">Voltar</button>
 
   </div>
 
