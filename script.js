@@ -1,26 +1,156 @@
-function abrirChat() {
-  document.getElementById("home").style.display = "none";
-  document.getElementById("chat").style.display = "block";
+/*=========================================
+ MORTEX STUDIO
+ SCRIPT.JS
+ PARTE 1
+=========================================*/
+
+// Elementos
+
+const home = document.getElementById("home");
+const chat = document.getElementById("chat");
+
+const messages = document.getElementById("messages");
+
+const input = document.getElementById("userInput");
+
+const sendButton = document.getElementById("sendButton");
+
+// Abrir chat
+
+function abrirChat(){
+
+    home.classList.remove("active");
+
+    chat.classList.add("active");
+
+    input.focus();
+
 }
 
-function voltar() {
-  document.getElementById("chat").style.display = "none";
-  document.getElementById("home").style.display = "block";
+// Voltar
+
+function voltarHome(){
+
+    chat.classList.remove("active");
+
+    home.classList.add("active");
+
 }
 
-function enviar() {
-  let input = document.getElementById("input");
-  let mensagens = document.getElementById("mensagens");
+// Criar mensagem
 
-  let texto = input.value;
-  if (!texto) return;
+function criarMensagem(texto, tipo){
 
-  mensagens.innerHTML += `<p><b>Você:</b> ${texto}</p>`;
+    const container = document.createElement("div");
 
-  let resposta = "Ainda estou aprendendo sobre JJS 👍";
+    if(tipo==="user"){
 
-  mensagens.innerHTML += `<p><b>IA:</b> ${resposta}</p>`;
+        container.className="user-message";
 
-  input.value = "";
-  mensagens.scrollTop = mensagens.scrollHeight;
+        container.innerHTML=`
+
+        <div class="bubble">
+
+            ${texto}
+
+        </div>
+
+        `;
+
+    }else{
+
+        container.className="ai-message";
+
+        container.innerHTML=`
+
+        <div class="avatar-mini">
+
+            💀
+
+        </div>
+
+        <div class="bubble ai">
+
+            ${texto}
+
+        </div>
+
+        `;
+
+    }
+
+    messages.appendChild(container);
+
+    messages.scrollTop=messages.scrollHeight;
+
+}
+
+// Enviar
+
+function enviarMensagem(){
+
+    const texto=input.value.trim();
+
+    if(texto==="") return;
+
+    criarMensagem(texto,"user");
+
+    input.value="";
+
+    digitando();
+
+}
+
+// Enter
+
+input.addEventListener("keydown",function(e){
+
+    if(e.key==="Enter"){
+
+        enviarMensagem();
+
+    }
+
+});
+
+sendButton.addEventListener("click",enviarMensagem);
+
+// IA digitando
+
+function digitando(){
+
+    const typing=document.createElement("div");
+
+    typing.className="ai-message";
+
+    typing.id="typing";
+
+    typing.innerHTML=`
+
+        <div class="avatar-mini">
+
+            💀
+
+        </div>
+
+        <div class="bubble ai">
+
+            <span class="dots">
+
+                ● ● ●
+
+            </span>
+
+            digitando...
+
+        </div>
+
+    `;
+
+    messages.appendChild(typing);
+
+    messages.scrollTop=messages.scrollHeight;
+
+    setTimeout(responderIA,1200);
+
 }
