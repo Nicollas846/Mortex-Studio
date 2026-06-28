@@ -17,34 +17,10 @@ function enviar() {
 
   mensagens.innerHTML += `<p><b>Você:</b> ${texto}</p>`;
 
-  let resposta = gerarResposta(texto);
+  let resposta = "Ainda estou aprendendo sobre JJS 👍";
 
   mensagens.innerHTML += `<p><b>IA:</b> ${resposta}</p>`;
 
   input.value = "";
   mensagens.scrollTop = mensagens.scrollHeight;
-}
-
-function gerarResposta(texto) {
-  texto = texto.toLowerCase();
-
-  // bloqueio de conteúdo fora do tema
-  if (
-    texto.includes("sexo") ||
-    texto.includes("nsfw") ||
-    texto.includes("18+")
-  ) {
-    return "Não posso responder esse tipo de pergunta.";
-  }
-
-  // respostas JJS
-  if (texto.includes("combo")) {
-    return "Treina timing e prática no modo treino 👍";
-  }
-
-  if (texto.includes("skill")) {
-    return "Observe padrões dos jogadores e treine reação.";
-  }
-
-  return "Ainda estou aprendendo sobre JJS 👍";
 }
