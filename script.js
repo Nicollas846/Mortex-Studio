@@ -154,3 +154,112 @@ function digitando(){
     setTimeout(responderIA,1200);
 
 }
+
+/*=========================================
+ SCRIPT.JS
+ PARTE 2
+=========================================*/
+
+function responderIA(){
+
+    const typing = document.getElementById("typing");
+
+    if(typing){
+
+        typing.remove();
+
+    }
+
+    const pergunta = document.querySelectorAll(".user-message .bubble");
+
+    const ultima = pergunta[pergunta.length-1].textContent.toLowerCase();
+
+    let resposta = "";
+
+    // Respostas
+
+    if(ultima.includes("oi") || ultima.includes("olá")){
+
+        resposta = "Olá! Sou a Mortex AI. Pergunte qualquer coisa sobre Jujutsu Shenanigans.";
+
+    }
+
+    else if(ultima.includes("combo")){
+
+        resposta = "Treine os cancelamentos de habilidade e pratique o tempo dos golpes. Isso melhora muito os combos.";
+
+    }
+
+    else if(ultima.includes("gojo")){
+
+        resposta = "Gojo possui golpes de longo alcance e grande controle de espaço.";
+
+    }
+
+    else if(ultima.includes("sukuna")){
+
+        resposta = "Sukuna é muito forte no combate corpo a corpo e possui ataques devastadores.";
+
+    }
+
+    else if(ultima.includes("hakari")){
+
+        resposta = "Hakari depende bastante da sorte do Jackpot para alcançar seu potencial máximo.";
+
+    }
+
+    else if(ultima.includes("mahito")){
+
+        resposta = "Mahito possui ataques rápidos e habilidades que confundem os adversários.";
+
+    }
+
+    else if(ultima.includes("megumi")){
+
+        resposta = "Megumi utiliza seus shikigamis para controlar o campo de batalha.";
+
+    }
+
+    else if(ultima.includes("yuji")){
+
+        resposta = "Yuji é um personagem equilibrado e ótimo para quem gosta de combos rápidos.";
+
+    }
+
+    else if(
+
+        ultima.includes("sexo") ||
+
+        ultima.includes("porn") ||
+
+        ultima.includes("18+") ||
+
+        ultima.includes("nude") ||
+
+        ultima.includes("beijo")
+
+    ){
+
+        resposta = "Desculpe. Eu respondo apenas perguntas relacionadas ao Jujutsu Shenanigans.";
+
+    }
+
+    else{
+
+        resposta = "Ainda não conheço essa resposta. Tente perguntar algo relacionado ao Jujutsu Shenanigans.";
+
+    }
+
+    criarMensagem(resposta,"ai");
+
+}
+
+/* Mensagem inicial */
+
+window.onload = () => {
+
+    home.classList.add("active");
+
+    chat.classList.remove("active");
+
+};
