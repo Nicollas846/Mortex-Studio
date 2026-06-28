@@ -17,7 +17,7 @@ function enviar() {
 
   mensagens.innerHTML += "<p><b>Você:</b> " + texto + "</p>";
 
-  let resposta = "Ainda estou aprendendo sobre isso 👍";
+  let resposta = "Ainda estou aprendendo sobre JJS 👍";
 
   mensagens.innerHTML += "<p><b>IA:</b> " + resposta + "</p>";
 
