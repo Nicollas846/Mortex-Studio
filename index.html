@@ -8,8 +8,9 @@
 
 <body>
 
-  <!-- 🏠 MENU INICIAL -->
+  <!-- 🏠 TELA INICIAL -->
   <div id="menu">
+
     <h1>Mortex Studio</h1>
 
     <div class="sidebar">
@@ -18,18 +19,21 @@
       <button>Sobre</button>
       <button>Contato</button>
     </div>
+
   </div>
 
-  <!-- 💬 PÁGINA DO CHAT -->
+  <!-- 💬 TELA DO CHAT -->
   <div id="chatPage" style="display:none;">
+
     <h2>Chat JJS</h2>
 
-    <div id="mensagens"></div>
+    <div id="mensagens" style="height:200px; overflow:auto; border:1px solid #00aaff; padding:10px;"></div>
 
     <input id="pergunta" placeholder="Digite sua dúvida sobre JJS">
     <button onclick="enviar()">Enviar</button>
 
     <button onclick="voltarMenu()">Voltar</button>
+
   </div>
 
   <!-- ⚙️ SCRIPT -->
@@ -37,16 +41,3 @@
 
 </body>
 </html>
-
-<div id="menu">
-
-  <h1>Mortex Studio</h1>
-
-  <div class="sidebar">
-    <button onclick="irInicio()">Início</button>
-    <button>Projetos</button>
-    <button>Sobre</button>
-    <button>Contato</button>
-  </div>
-
-</div>

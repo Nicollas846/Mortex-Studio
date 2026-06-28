@@ -15,16 +15,13 @@ function enviar() {
   let texto = input.value;
   if (!texto) return;
 
-  // mensagem do usuário
-  mensagens.innerHTML += `<p><b>Você:</b> ${texto}</p>`;
+  mensagens.innerHTML += "<p><b>Você:</b> " + texto + "</p>";
 
-  // resposta simples da IA
   let resposta = "Ainda estou aprendendo sobre JJS 👍";
 
-  mensagens.innerHTML += `<p><b>IA:</b> ${resposta}</p>`;
+  mensagens.innerHTML += "<p><b>IA:</b> " + resposta + "</p>";
 
   input.value = "";
 
-  // scroll automático
   mensagens.scrollTop = mensagens.scrollHeight;
 }
