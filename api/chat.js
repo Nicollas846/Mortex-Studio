@@ -5,12 +5,13 @@ const groq = new Groq({
 });
 
 export default async function handler(req, res) {
-  // Só aceita POST
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
+
     const { message } = req.body;
 
     if (!message) {
@@ -21,9 +22,8 @@ export default async function handler(req, res) {
       model: "llama3-70b-8192",
       messages: [
         {
-          {
-  role: "system",
-  content: `
+          role: "system",
+          content: `
 Você é a Mortex AI.
 
 Você é especialista em Jujutsu Kaisen e cultura de anime.
@@ -32,24 +32,26 @@ Você conhece personagens como Gojo, Sukuna, Yuji, Megumi, Naoya Zenin e outros.
 Se não souber algo, responda de forma inteligente ao invés de dizer que não reconhece.
 
 Responda sempre de forma natural e como um especialista em anime.
-`,
-},
+`
+        },
         {
           role: "user",
-          content: message,
-        },
+          content: message
+        }
       ],
     });
 
     const reply = completion.choices[0]?.message?.content;
 
     return res.status(200).json({
-      reply,
+      reply: reply || "Sem resposta da IA"
     });
+
   } catch (error) {
     console.error(error);
+
     return res.status(500).json({
-      error: "Erro ao processar resposta da IA",
+      error: "Erro ao processar resposta da IA"
     });
   }
 }
