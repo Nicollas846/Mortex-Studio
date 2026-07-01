@@ -1,126 +1,270 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mortex Studio Chat</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mortex Studio</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f0f0f;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f0f0f;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-    header {
-      padding: 15px;
-      background: #1a1a1a;
-      text-align: center;
-      font-weight: bold;
-    }
+/* TELA INICIAL */
+#home {
+  text-align: center;
+}
 
-    #chat {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-    }
+button {
+  padding: 15px 25px;
+  font-size: 18px;
+  background: #2d7dff;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
 
-    .msg {
-      padding: 10px;
-      margin: 5px 0;
-      border-radius: 10px;
-      max-width: 70%;
-    }
+/* CHAT */
+#chatPage {
+  display: none;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
 
-    .user {
-      background: #2d7dff;
-      margin-left: auto;
-      text-align: right;
-    }
+header {
+  padding: 15px;
+  background: #1a1a1a;
+  text-align: center;
+}
 
-    .bot {
-      background: #333;
-      margin-right: auto;
-    }
+#chat {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
 
-    #inputArea {
-      display: flex;
-      padding: 10px;
-      background: #1a1a1a;
-    }
+.msg {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  max-width: 70%;
+}
 
-    input {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      outline: none;
-    }
+.user { background: #2d7dff; margin-left: auto; }
+.bot { background: #333; }
 
-    button {
-      margin-left: 10px;
-      padding: 10px 15px;
-      border: none;
-      background: #2d7dff;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+#inputArea {
+  display: flex;
+  padding: 10px;
+  background: #1a1a1a;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+}
+
+button.send {
+  margin-left: 10px;
+  padding: 10px;
+}
+</style>
 </head>
 
 <body>
 
-<header>Mortex AI 💬</header>
+<!-- HOME -->
+<div id="home">
+  <h1>Mortex Studio</h1>
+  <button onclick="start()">Iniciar Chat</button>
+</div>
 
-<div id="chat"></div>
+<!-- CHAT -->
+<div id="chatPage">
+  <header>Mortex AI 💬</header>
 
-<div id="inputArea">
-  <input id="input" placeholder="Digite sua mensagem..." />
-  <button onclick="sendMessage()">Enviar</button>
+  <div id="chat"></div>
+
+  <div id="inputArea">
+    <input id="input" placeholder="Digite..." />
+    <button class="send" onclick="send()">Enviar</button>
+  </div>
 </div>
 
 <script>
-  const chat = document.getElementById("chat");
+function start() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("chatPage").style.display = "flex";
+}
 
-  function addMessage(text, type) {
-    const div = document.createElement("div");
-    div.className = "msg " + type;
-    div.innerText = text;
-    chat.appendChild(div);
-    chat.scrollTop = chat.scrollHeight;
-  }
+function add(text, type) {
+  const div = document.createElement("div");
+  div.className = "msg " + type;
+  div.innerText = text;
+  document.getElementById("chat").appendChild(div);
+}
 
-  async function sendMessage() {
-    const input = document.getElementById("input");
-    const text = input.value;
+async function send() {
+  const input = document.getElementById("input");
+  const text = input.value;
+  if (!text) return;
 
-    if (!text) return;
+  add(text, "user");
+  input.value = "";
 
-    addMessage(text, "user");
-    input.value = "";
+  const res = await fetch("/api/chat", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ message: text })
+  });
 
-    addMessage("Digitando...", "bot");
+  const data = await res.json();
+  add(data.reply, "bot");
+}
+</script>
 
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message: text }),
-    });
+</body>
+</html><!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mortex Studio</title>
 
-    const data = await res.json();
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f0f0f;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-    // remove "digitando..."
-    document.querySelector(".bot:last-child").remove();
+/* TELA INICIAL */
+#home {
+  text-align: center;
+}
 
-    addMessage(data.reply, "bot");
-  }
+button {
+  padding: 15px 25px;
+  font-size: 18px;
+  background: #2d7dff;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* CHAT */
+#chatPage {
+  display: none;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+
+header {
+  padding: 15px;
+  background: #1a1a1a;
+  text-align: center;
+}
+
+#chat {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.msg {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  max-width: 70%;
+}
+
+.user { background: #2d7dff; margin-left: auto; }
+.bot { background: #333; }
+
+#inputArea {
+  display: flex;
+  padding: 10px;
+  background: #1a1a1a;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+}
+
+button.send {
+  margin-left: 10px;
+  padding: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME -->
+<div id="home">
+  <h1>Mortex Studio</h1>
+  <button onclick="start()">Iniciar Chat</button>
+</div>
+
+<!-- CHAT -->
+<div id="chatPage">
+  <header>Mortex AI 💬</header>
+
+  <div id="chat"></div>
+
+  <div id="inputArea">
+    <input id="input" placeholder="Digite..." />
+    <button class="send" onclick="send()">Enviar</button>
+  </div>
+</div>
+
+<script>
+function start() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("chatPage").style.display = "flex";
+}
+
+function add(text, type) {
+  const div = document.createElement("div");
+  div.className = "msg " + type;
+  div.innerText = text;
+  document.getElementById("chat").appendChild(div);
+}
+
+async function send() {
+  const input = document.getElementById("input");
+  const text = input.value;
+  if (!text) return;
+
+  add(text, "user");
+  input.value = "";
+
+  const res = await fetch("/api/chat", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ message: text })
+  });
+
+  const data = await res.json();
+  add(data.reply, "bot");
+}
 </script>
 
 </body>
