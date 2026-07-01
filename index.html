@@ -6,15 +6,23 @@
 <title>Mortex Studio</title>
 
 <style>
+/* ===== FUNDO ANIMADO ===== */
 body {
   margin: 0;
   font-family: Arial;
-  background: #0f0f0f;
-  color: white;
   overflow: hidden;
+  color: white;
+  background: #000;
+  animation: bgPulse 6s infinite alternate;
 }
 
-/* 🔵 CANVAS DAS FAÍSCAS */
+@keyframes bgPulse {
+  0% { background: #000814; }
+  50% { background: #001d3d; }
+  100% { background: #000000; }
+}
+
+/* CANVAS FAÍSCAS */
 #bg {
   position: fixed;
   top: 0;
@@ -37,17 +45,39 @@ body {
 }
 
 #home h1 {
-  font-size: 40px;
+  font-size: 45px;
+  text-shadow: 0 0 20px #2d7dff;
 }
 
+/* 🔵 BOTÃO ULTRA */
 #home button {
-  padding: 15px 25px;
+  padding: 15px 30px;
   font-size: 18px;
-  background: #2d7dff;
-  border: none;
   color: white;
-  border-radius: 10px;
+  background: transparent;
+  border: 2px solid #2d7dff;
+  border-radius: 12px;
   cursor: pointer;
+  transition: 0.4s;
+  box-shadow: 0 0 10px #2d7dff;
+  animation: borderGlow 3s infinite alternate;
+}
+
+#home button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #2d7dff;
+}
+
+/* borda viva */
+@keyframes borderGlow {
+  0% {
+    border-color: #2d7dff;
+    box-shadow: 0 0 10px #2d7dff;
+  }
+  100% {
+    border-color: #000;
+    box-shadow: 0 0 25px #2d7dff;
+  }
 }
 
 /* ===== CHAT ===== */
@@ -61,7 +91,7 @@ body {
 
 header {
   padding: 15px;
-  background: rgba(26,26,26,0.8);
+  background: rgba(0,0,0,0.6);
   text-align: center;
   backdrop-filter: blur(5px);
 }
@@ -91,7 +121,7 @@ header {
 #inputArea {
   display: flex;
   padding: 10px;
-  background: rgba(26,26,26,0.8);
+  background: rgba(0,0,0,0.6);
 }
 
 input {
@@ -105,8 +135,8 @@ button.send {
   margin-left: 10px;
   padding: 10px;
   background: #2d7dff;
-  color: white;
   border: none;
+  color: white;
   cursor: pointer;
 }
 </style>
@@ -136,7 +166,7 @@ button.send {
 </div>
 
 <script>
-/* ================= FAÍSCAS AZUIS ================= */
+/* ===== FUNDO COM FAÍSCAS AZUIS ===== */
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
@@ -145,17 +175,17 @@ canvas.height = window.innerHeight;
 
 let particles = [];
 
-for (let i = 0; i < 80; i++) {
+for (let i = 0; i < 100; i++) {
   particles.push({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
-    r: Math.random() * 2,
-    dx: (Math.random() - 0.5) * 1,
-    dy: (Math.random() - 0.5) * 1
+    vx: (Math.random() - 0.5) * 1,
+    vy: (Math.random() - 0.5) * 1,
+    r: Math.random() * 2
   });
 }
 
-function draw() {
+function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   ctx.fillStyle = "#2d7dff";
@@ -165,19 +195,19 @@ function draw() {
     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
     ctx.fill();
 
-    p.x += p.dx;
-    p.y += p.dy;
+    p.x += p.vx;
+    p.y += p.vy;
 
-    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
   });
 
-  requestAnimationFrame(draw);
+  requestAnimationFrame(animate);
 }
 
-draw();
+animate();
 
-/* ================= CHAT ================= */
+/* ===== CHAT ===== */
 function start() {
   document.getElementById("home").style.display = "none";
   document.getElementById("chatPage").style.display = "flex";
@@ -200,7 +230,9 @@ async function send() {
 
   const res = await fetch("/api/chat", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({ message: text })
   });
 
