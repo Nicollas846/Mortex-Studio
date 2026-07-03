@@ -10,24 +10,33 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message } = req.body;
+    const { messages } = req.body;
 
-    if (!message) {
-      return res.status(400).json({ error: "Mensagem não enviada" });
+    if (!messages || !Array.isArray(messages)) {
+      return res.status(400).json({ error: "Messages inválidas" });
     }
 
     const completion = await groq.chat.completions.create({
-     model: "llama-3.1-8b-instant",
+      model: "llama-3.1-8b-instant",
       messages: [
         {
           role: "system",
-          content:
-            "Você é a Mortex AI, especialista em animes como Jujutsu Kaisen. Responda de forma natural."
+          content: `
+Você é a Mortex AI.
+
+Você pode falar sobre:
+- Jujutsu Shenanigans (JJS)
+- Jujutsu Kaisen (anime e mangá)
+
+REGRAS:
+- Seja um coach de JJS (combos, dicas, estratégias)
+- Também pode responder sobre JJK
+- Seja direto, estilo jogador experiente
+- Nunca invente coisas que não existem
+- Se o usuário disser "bora mudar de assunto", responda: "Bora, sobre o que?"
+`
         },
-        {
-          role: "user",
-          content: message
-        }
+        ...messages
       ],
       temperature: 0.7,
     });
@@ -39,10 +48,10 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error("ERRO GROQ:", error);
+    console.error("ERRO:", error);
 
     return res.status(500).json({
-      error: error.message || "Erro interno na IA",
+      error: error.message || "Erro interno",
     });
   }
 }
