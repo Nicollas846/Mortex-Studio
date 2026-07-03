@@ -49,11 +49,11 @@ Responda sempre de forma natural e como um especialista em anime.
       reply: reply || "Sem resposta da IA"
     });
 
-  } catch (error) {
-    console.error(error);
+  catch (error) {
+  console.error("ERRO GROQ COMPLETO:", error);
 
-    return res.status(500).json({
-      error: "Erro ao processar resposta da IA"
-    });
-  }
+  return res.status(500).json({
+    error: error.message || "Erro desconhecido"
+  });
+}
 }
