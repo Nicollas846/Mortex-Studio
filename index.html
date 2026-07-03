@@ -155,15 +155,30 @@ button.send {
 <div id="chatPage">
   <header>Mortex AI 💬</header>
 
-  <div id="chat"></div>
+<div id="chat"></div>
 
-  <div id="inputArea">
-    <button onclick="novoChat()">🆕 Novo Chat</button>
-    
-    <input id="input" placeholder="Digite..." />
-    
-    <button class="send" onclick="send()">Enviar</button>
-  </div>
+<div id="inputArea">
+
+    <button id="newChat" onclick="novoChat()">
+        🆕 Novo Chat
+    </button>
+
+    <input
+        id="input"
+        type="text"
+        placeholder="Pergunte qualquer coisa..."
+        autocomplete="off"
+    />
+
+    <button
+        id="sendButton"
+        class="send"
+        onclick="send()"
+    >
+        Enviar
+    </button>
+
+</div>
 </div>
 
 <script>
