@@ -5,15 +5,11 @@ const groq = new Groq({
 });
 
 export default async function handler(req, res) {
-
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-
-    console.log("API KEY:", process.env.GROQ_API_KEY);
-    
     const { message } = req.body;
 
     if (!message) {
@@ -21,39 +17,32 @@ export default async function handler(req, res) {
     }
 
     const completion = await groq.chat.completions.create({
-model: "llama3-8b-8192",
+      model: "llama3-8b-8192",
       messages: [
         {
           role: "system",
-          content: `
-Você é a Mortex AI.
-
-Você é especialista em Jujutsu Kaisen e cultura de anime.
-Você conhece personagens como Gojo, Sukuna, Yuji, Megumi, Naoya Zenin e outros.
-
-Se não souber algo, responda de forma inteligente ao invés de dizer que não reconhece.
-
-Responda sempre de forma natural e como um especialista em anime.
-`
+          content:
+            "Você é a Mortex AI, especialista em animes como Jujutsu Kaisen. Responda de forma natural."
         },
         {
           role: "user",
           content: message
         }
       ],
+      temperature: 0.7,
     });
 
-    const reply = completion.choices[0]?.message?.content;
+    const reply = completion.choices?.[0]?.message?.content;
 
     return res.status(200).json({
-      reply: reply || "Sem resposta da IA"
+      reply: reply || "Sem resposta da IA",
     });
 
-  catch (error) {
-  console.error("ERRO GROQ COMPLETO:", error);
+  } catch (error) {
+    console.error("ERRO GROQ:", error);
 
-  return res.status(500).json({
-    error: error.message || "Erro desconhecido"
-  });
-}
+    return res.status(500).json({
+      error: error.message || "Erro interno na IA",
+    });
+  }
 }
