@@ -222,19 +222,42 @@ function add(text, type) {
 
 async function send() {
   const input = document.getElementById("input");
-  const text = input.value;
+  const text = input.value.trim();
+
   if (!text) return;
 
   add(text, "user");
   input.value = "";
 
-  const res = await fetch("/api/chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ message: text })
-  });
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: text
+      })
+    });
+
+    const resposta = await res.text();
+
+    console.log(resposta);
+
+    if (!res.ok) {
+      add("Erro da API: " + resposta, "bot");
+      return;
+    }
+
+    const data = JSON.parse(resposta);
+
+    add(data.reply, "bot");
+
+  } catch (erro) {
+    console.error(erro);
+    add("Erro ao conectar com a IA.", "bot");
+  }
+}
 
   const data = await res.json();
   add(data.reply, "bot");
