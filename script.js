@@ -7,12 +7,14 @@ function add(text, type) {
   const div = document.createElement("div");
   div.className = "msg " + type;
   div.innerText = text;
+
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
 }
 
 async function send() {
   const text = input.value.trim();
+
   if (!text) return;
 
   add(text, "user");
@@ -24,33 +26,57 @@ async function send() {
     content: text
   });
 
-  const res = await fetch("/api/chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      messages: chatHistory
-    })
-  });
+  try {
 
-  const data = await res.json();
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        messages: chatHistory
+      })
+    });
 
-  add(data.reply, "bot");
+    const data = await res.json();
 
-  chatHistory.push({
-    role: "assistant",
-    content: data.reply
-  });
+    if (!res.ok) {
+      add("Erro: " + (data.error || "Erro desconhecido"), "bot");
+      return;
+    }
+
+    add(data.reply, "bot");
+
+    chatHistory.push({
+      role: "assistant",
+      content: data.reply
+    });
+
+  } catch (err) {
+
+    console.error(err);
+
+    add("Erro ao conectar com a IA.", "bot");
+
+  }
 }
 
 // ENTER
-input.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") send();
+input.addEventListener("keydown", function (e) {
+
+  if (e.key === "Enter") {
+    send();
+  }
+
 });
 
 // NOVO CHAT
 function novoChat() {
+
   chatHistory = [];
+
   chat.innerHTML = "";
+
+  add("Novo chat iniciado. Como posso ajudar?", "bot");
+
 }
